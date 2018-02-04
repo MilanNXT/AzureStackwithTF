@@ -17,12 +17,7 @@ variable "resource_group_name" {
 #VM Information
 variable "vm_size" {
     type = "string"
-    description = "Select a VM size. Valid inputs are: 
-        Standard_E16s_v3
-        Standard_D32s_v3
-        Standard_E32s_v3
-        Standard_D64s_v3
-        Standard_E64s_v3"
+    description = "Select a VM size. Valid inputs are: Standard_E16s_v3, Standard_D32s_v3, Standard_E32s_v3, Standard_D64s_v3, Standard_E64s_v3"
     default = "Standard_E16s_v3"
 }
 
@@ -53,7 +48,7 @@ variable "vnet_name" {
 variable "vnet_cidr_range" {
     type = "string"
     description = "CIDR address range for VNet.  Will create a single subnet in VNet using entire address space"
-    default = "10.0.0.0/24"
+    default = "10.0.0.0/16"
 }
 
 variable "public_dns_name" {
