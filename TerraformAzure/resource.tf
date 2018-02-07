@@ -75,6 +75,7 @@ resource "azurerm_virtual_machine" "azs" {
   resource_group_name   = "${azurerm_resource_group.AzSonAz.name}"
   network_interface_ids = ["${azurerm_network_interface.azsnic.id}"]
   vm_size               = "${var.vm_size}"
+  license_type          = "Windows_Server"
 
   delete_os_disk_on_termination = true
 
@@ -132,6 +133,10 @@ resource "azurerm_virtual_machine" "azs" {
     computer_name  = "${var.vm_name}"
     admin_username = "AzureStackAdmin"
     admin_password = "Password1234!"
+  }
+
+  os_profile_windows_config {
+    provision_vm_agent = true
   }
 
 }
