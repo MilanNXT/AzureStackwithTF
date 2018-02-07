@@ -15,7 +15,7 @@ Add-AzureRMEnvironment `
     -Name "AzureStackAdmin" `
     -ArmEndpoint $ArmEndpoint
 
-Add-AzureRmAccount -Environment "AzureStackAdmin"
+Add-AzureRmAccount -Environment "AzureStackAdmin" -Credential $AzureStackAdmin
 
 New-AzureRmResourceGroup -Name $ResourceGroupName -Location local
 
@@ -24,9 +24,9 @@ $deployment = New-AzureRmResourceGroupDeployment -Name $ResourceGroupName `
     -TemplateUri "https://raw.githubusercontent.com/Azure/AzureStack-QuickStart-Templates/master/mysql-standalone-server-windows/azuredeploy.json" `
     -TemplateParameterObject @{"VMName"=$VMName;"AdminUserName"=$AdminUserName;"adminPassword"=$MySQLCredentials.Password}
 
-Invoke-WebRequest -Uri https://aka.ms/azurestackmysqlrp1712 -OutFile C:\AzureStackOnAzureVM\QuickStart\MSSQL\AzureStack.MySQL.RP.zip
+Invoke-WebRequest -Uri https://aka.ms/azurestackmysqlrp1712 -OutFile C:\AzureStackOnAzureVM\QuickStart\MySQL\AzureStack.MySQL.RP.zip
 
-Expand-Archive -Path C:\AzureStackOnAzureVM\QuickStart\MySQL\AzureStack.MySQL.RP.zip
+Expand-Archive -Path C:\AzureStackOnAzureVM\QuickStart\MySQL\AzureStack.MySQL.RP.zip -DestinationPath C:\AzureStackOnAzureVM\QuickStart\MySQL\
 
 # Use the NetBIOS name for the Azure Stack domain. On the Azure SDK, the default is AzureStack, and the default prefix is AzS.
 # For integrated systems, the domain and the prefix are the same.
@@ -35,7 +35,7 @@ $prefix = "AzS"
 $privilegedEndpoint = "$prefix-ERCS01"
 
 # Point to the directory where the resource provider installation files were extracted.
-$tempDir = 'C:\AzureStackOnAzureVM\QuickStart\MSSQL'
+$tempDir = 'C:\AzureStackOnAzureVM\QuickStart\MySQL\AzureStack.MySQL.RP'
 
 # Set the credentials for the new resource provider VM.
 $vmLocalAdminPass = ConvertTo-SecureString "P@ssw0rd1" -AsPlainText -Force
